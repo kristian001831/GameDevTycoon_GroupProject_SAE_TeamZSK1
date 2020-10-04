@@ -6,12 +6,21 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     [SerializeField] private List<Menu> menus = new List<Menu>();
-    [SerializeField] private int levelToLoad = 2;
+
+    [SerializeField] private GameObject failScreen;
+    private FailSystem failSystem;
     
     private void Start()
     { 
         // Show the first menu on start
         ShowMenu(menus[0]);
+        failSystem = FindObjectOfType<FailSystem>();
+        failSystem.OnGameFailed += ShowFailScreen;
+    }
+
+    private void ShowFailScreen()
+    {
+        failScreen.SetActive(true);
     }
     
     public void ShowMenu(Menu menuToShow)

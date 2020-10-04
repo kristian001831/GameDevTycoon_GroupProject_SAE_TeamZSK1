@@ -50,13 +50,22 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\SalesCalculator.cs" />
+     <Compile Include="Assets\Scripts\ProductCreation\CreateProduct.cs" />
+     <Compile Include="Assets\Scripts\ProductCreation\CleanInputFields.cs" />
+     <Compile Include="Assets\Scripts\SaleTests1.cs" />
+     <Compile Include="Assets\Scripts\UIBasics\Tabs.cs" />
      <Compile Include="Assets\Scripts\SaveSystem.cs" />
-     <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
-     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
-     <Compile Include="Assets\Scripts\Buttons.cs" />
-     <Compile Include="Assets\Scripts\SaleSystem.cs" />
-     <Compile Include="Assets\Scripts\Currency.cs" />
+     <Compile Include="Assets\Scripts\ProductCreation\Product.cs" />
      <Compile Include="Assets\Scripts\Saving.cs" />
+     <Compile Include="Assets\Scripts\ProductCreation\ProductsHolder.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
+     <Compile Include="Assets\Scripts\UIBasics\OpenClose.cs" />
+     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+     <Compile Include="Assets\Scripts\CurrencyHandler.cs" />
+     <Compile Include="Assets\Scripts\FailSystem.cs" />
+     <Compile Include="Assets\Scripts\ProductCreation\DisplaySetup.cs" />
+     <Compile Include="Assets\Scripts\UIInformations.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
@@ -79,31 +88,31 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/Users/kristiankovac/GitHubProjects/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Users/kristiankovac/GitHubProjects/GameDevTycoon_GroupProject_SAE_TeamZSK/SAE-Group-ZSK_TycoonMobileGame/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.1.4f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
