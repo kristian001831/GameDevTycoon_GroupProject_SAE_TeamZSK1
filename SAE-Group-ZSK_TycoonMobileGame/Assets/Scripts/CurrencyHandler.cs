@@ -1,25 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CurrencyHandler : MonoBehaviour
 {
-    public float Currency { get; private set;}
-    [SerializeField] private const string playerPrefNameCurrency = "SavedCurrency";
+    public float Currency { get; private set; } = 1000f;
 
+    [SerializeField] private const string playerPrefNameCurrency = "SavedCurrency";
+    [SerializeField] private TextMeshProUGUI currencyText;
     public delegate void ZSK_ChangeCurrency(float currency);
     public event ZSK_ChangeCurrency OnChangeCurrency;
 
     void Start()
     {
-        //TODO: Debug, delete after that
-        Currency = 1000f;
-        
         // SavedCurrency is the value where the saved value is from, TODO: change it from playerprefs to json or so
         if (PlayerPrefs.HasKey(playerPrefNameCurrency))
         {
             Currency = PlayerPrefs.GetFloat(playerPrefNameCurrency);
         }
+        
+        currencyText.SetText("Currency: {0} €", Currency);
     }
 
     public void ModifyCurrency(float x)
@@ -27,8 +28,10 @@ public class CurrencyHandler : MonoBehaviour
         Currency += x;
         
         Debug.Log("In Modified Currency");
-
+        Debug.Log(Currency);
         OnChangeCurrency?.Invoke(Currency);
+        
+        currencyText.SetText("Currency: {0} €", Currency);
     }
 
     public void SaveCurrency()

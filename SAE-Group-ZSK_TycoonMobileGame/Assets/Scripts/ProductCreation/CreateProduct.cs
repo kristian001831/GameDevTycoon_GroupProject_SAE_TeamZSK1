@@ -57,8 +57,17 @@ public class CreateProduct : MonoBehaviour
             _productInfo.InvestedAmount = float.Parse(_invest.text);
             double tempI = (double)Math.Round(_productInfo.InvestedAmount, 2);
             _productInfo.InvestedAmount = (float)tempI;
-            
-            currencyHandler.ModifyCurrency(-_productInfo.InvestedAmount);
+
+            if (_productInfo.InvestedAmount > currencyHandler.Currency)
+            {
+                Debug.Log("You dont have enought capital!");
+                return; 
+            }
+            else
+            {
+                //TODO: It anyway creates the game object, has to be fixed to dont create if too poor
+                currencyHandler.ModifyCurrency(-_productInfo.InvestedAmount);
+            }
         }
         else
         {

@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Scripts/UIInformations.cs
-    - Assets/Scripts/UIInformations.cs.meta
     - 
-    m_Values: 010101
-  RevisionSummary: fail screen has a button for main menu
+    m_Values: 01
+  RevisionSummary: .
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

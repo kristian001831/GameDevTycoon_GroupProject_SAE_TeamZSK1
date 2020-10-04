@@ -65,7 +65,7 @@
      <Compile Include="Assets\Scripts\CurrencyHandler.cs" />
      <Compile Include="Assets\Scripts\FailSystem.cs" />
      <Compile Include="Assets\Scripts\ProductCreation\DisplaySetup.cs" />
-     <Compile Include="Assets\Scripts\UIInformations.cs" />
+     <Compile Include="Assets\Scripts\NotWorkingYet\UIInformations.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
