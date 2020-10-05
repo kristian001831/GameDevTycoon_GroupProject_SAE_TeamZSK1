@@ -20,7 +20,7 @@ public class CurrencyHandler : MonoBehaviour
             Currency = PlayerPrefs.GetFloat(playerPrefNameCurrency);
         }
         
-        currencyText.SetText("Currency: {0} €", Currency);
+        currencyText.SetText("{0} $", Currency);
     }
 
     public void ModifyCurrency(float x)
@@ -31,7 +31,7 @@ public class CurrencyHandler : MonoBehaviour
         Debug.Log(Currency);
         OnChangeCurrency?.Invoke(Currency);
         
-        currencyText.SetText("Currency: {0} €", Currency);
+        currencyText.SetText("{0} $", Currency);
     }
 
     public void SaveCurrency()
