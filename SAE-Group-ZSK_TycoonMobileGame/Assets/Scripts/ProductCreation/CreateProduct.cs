@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 public class CreateProduct : MonoBehaviour
 {
+
     [SerializeField] private GameObject _createObjectUI;
     [SerializeField] private GameObject _productPrefab;
     [SerializeField] private Transform _productsParent;
@@ -25,13 +26,15 @@ public class CreateProduct : MonoBehaviour
 
     private Product _productInfo;
     private RectTransform _display;
+    public float ProductPrice;
+    public float ProductInvest;
 
     void Start()
     {
         currencyHandler = FindObjectOfType<CurrencyHandler>();
         Debug.Log(currencyHandler);
     }
-    
+
     public void CreateAProduct()
     {
         GameObject obj = Instantiate(_productPrefab);
@@ -46,10 +49,12 @@ public class CreateProduct : MonoBehaviour
             _productInfo.Price = float.Parse(_price.text);
             double tempP = (double)Math.Round(_productInfo.Price, 2);
             _productInfo.Price = (float)tempP;
+            ProductPrice = (float)tempP;
         }
         else
         {
             _productInfo.Price = 0.0f;
+            ProductPrice = 0.0f;
         }
 
         if (float.TryParse(_invest.text, out _productInfo.InvestedAmount))
@@ -58,20 +63,14 @@ public class CreateProduct : MonoBehaviour
             double tempI = (double)Math.Round(_productInfo.InvestedAmount, 2);
             _productInfo.InvestedAmount = (float)tempI;
 
-            if (_productInfo.InvestedAmount > currencyHandler.Currency)
-            {
-                Debug.Log("You dont have enought capital!");
-                return; 
-            }
-            else
-            {
-                //TODO: It anyway creates the game object, has to be fixed to dont create if too poor
-                currencyHandler.ModifyCurrency(-_productInfo.InvestedAmount);
-            }
+            ProductInvest = (float)tempI;
+
+            currencyHandler.ModifyCurrency(-_productInfo.InvestedAmount);
         }
         else
         {
             _productInfo.InvestedAmount = 0.0f;
+            ProductInvest = 0.0f;
         }
 
         _list.Products.Add(obj);

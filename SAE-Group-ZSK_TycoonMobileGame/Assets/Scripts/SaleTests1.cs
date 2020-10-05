@@ -37,21 +37,21 @@ public class SaleTests1 : MonoBehaviour
     [SerializeField] float interestFallOffScalerTest;
 
 
-    void Update()
-    {
-        salesCalculator.Quality = qualityTest;
-        salesCalculator.PriceOfAdds = priceOfAdsTest;
-        salesCalculator.PriceOfProduct = priceOfProdductTest;
-        salesCalculator.MagnitudeOfQuality = magnitudeOfQualityTest;
-        salesCalculator.PaidForAds = paidForAdsTest;
+    //void Update()
+    //{
+    //    salesCalculator.Quality = qualityTest;
+    //    salesCalculator.PriceOfAdds = priceOfAdsTest;
+    //    salesCalculator.PriceOfProduct = priceOfProdductTest;
+    //    salesCalculator.MagnitudeOfQuality = magnitudeOfQualityTest;
+    //    salesCalculator.PaidForAds = paidForAdsTest;
 
-        salesCalculator.TrendScaler = trendScalerTest;
-        salesCalculator.PriceToPurchaseRateScaler = priceToPurchaseRateScalerTest;
-        salesCalculator.AdvertisementScaler = advertisementScalerTest;
-        salesCalculator.InterestFallOffScaler = interestFallOffScalerTest;
+    //    salesCalculator.TrendScaler = trendScalerTest;
+    //    salesCalculator.PriceToPurchaseRateScaler = priceToPurchaseRateScalerTest;
+    //    salesCalculator.AdvertisementScaler = advertisementScalerTest;
+    //    salesCalculator.InterestFallOffScaler = interestFallOffScalerTest;
 
        
-    }
+    //}
 
 
     private void OnDrawGizmos()//graph drawing

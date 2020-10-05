@@ -14,9 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
+    - Assets/Pictures.meta
+    - Assets/Pictures/Credits.png
+    - Assets/Pictures/Credits.png.meta
+    - Assets/Pictures/Exit.png
+    - Assets/Pictures/Exit.png.meta
+    - Assets/Pictures/Menu_Title.png
+    - Assets/Pictures/Menu_Title.png.meta
+    - Assets/Pictures/New_Game.png
+    - Assets/Pictures/New_Game.png.meta
+    - Assets/Pictures/Settings.png
+    - Assets/Pictures/Settings.png.meta
+    - Assets/Scenes/MainMenu.unity
     - 
-    m_Values: 01
-  RevisionSummary: .
+    m_Values: 01010101010101010101010101
+  RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

@@ -1,43 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using Unity.Profiling;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using UnityEditor.VersionControl;
+using System.Runtime.InteropServices.WindowsRuntime;
 
-
-public class SalesCalculator
+public class SalesCalculator : MonoBehaviour
 {
-    public float Quality { get; set; }
-    public float PriceOfProduct { get; set; }
-    public float PriceOfAdds { get; set; }
-    public float MagnitudeOfQuality { get; set; }
-    public bool  PaidForAds { get; set; }
+    float price;
+    float invest;
 
-    public float TrendScaler { get; set; }
-    public float PriceToPurchaseRateScaler { get; set; }
-    public float AdvertisementScaler { get; set; }
-    public float InterestFallOffScaler { get; set; }
+    public float Quality { get; set; } = 1;
+    public float PriceOfProduct { get => price; set => value = _createProduct.ProductPrice; }
+
+    public float PriceInvested { get => invest; set => value = _createProduct.ProductInvest; }
+
+    public float MagnitudeOfQuality { get; set; } = 1;
+
+
+    //public float TrendScaler { get => trendScaler; set => value = 1; }
+    //public float PriceToPurchaseRateScaler { get => priceScaler; set => value = 1; }
+    //public float InvestmentScaler { get => investmentScaler; set => value = 1; }
+    //public float InterestFallOffScaler { get => interestFallOffScaler; set => value = 1; }
+
+    [SerializeField] private TMP_InputField _daySinceRelease;
+    [SerializeField] private Button _calculateCurrencyButton;
+
+    [SerializeField] private CurrencyHandler _currencyHandler;
+    [SerializeField] private CreateProduct _createProduct;
+
+    private void Start()
+    {
+        _calculateCurrencyButton.onClick.AddListener(CalculateNewCurrency);
+    }
+
+    public void CalculateNewCurrency()
+    {
+        float days = float.Parse(_daySinceRelease.text);
+
+        price = _createProduct.ProductPrice;
+        invest = _createProduct.ProductInvest;
+
+        float x = CopiesSoldByDayX(days);
+
+        float calculateNewCurrency = (x * price) - invest;
+        _currencyHandler.ModifyCurrency(calculateNewCurrency);
+    }
 
 
     //clamp every function to 0
 
 
-    public float CopiesSoldByDayX(float xDaysSinceRelease) //
+    public int CopiesSoldByDayX(float xDaysSinceRelease) //
     {
         float result = 1;
+        result *= Mathf.Lerp(1, TrendFunction(xDaysSinceRelease), 1);
 
-        result *= Mathf.Lerp(1,TrendFunction(xDaysSinceRelease),TrendScaler);
+        result *= Mathf.Lerp(1, PriceToPurchase(Quality, PriceOfProduct), 1);
 
-        result *= Mathf.Lerp(1,PriceToPurchase(Quality, PriceOfProduct),PriceToPurchaseRateScaler);
+        result *= Mathf.Lerp(1, Investment(PriceInvested), 1);
 
-        result *= Mathf.Lerp(1,Advertisement(PriceOfAdds, PaidForAds),AdvertisementScaler);
-       // UnityEngine.Debug.Log(result);
+        result *= Mathf.Lerp(1, InterestFalloff(xDaysSinceRelease, Quality, MagnitudeOfQuality), 1);
 
-        result *= Mathf.Lerp(1,InterestFalloff(xDaysSinceRelease, Quality, MagnitudeOfQuality),InterestFallOffScaler);
-
-  
-        return result;
+        return (int)result;
     }
 
     private float TrendFunction(float xDays)
@@ -66,24 +94,18 @@ public class SalesCalculator
     }
 
 
-    private float Advertisement(float adsPrice, bool paidForAdds)
+    private float Investment(float investment)
     {
-        
-        if (paidForAdds == true)
-        {
-           return ((-1) * (1 / adsPrice) + 1);
-        }
-        else
-        {
-           return  1;
-        }
+
+        return ((-1) * (1 / investment) + 1);
+
 
         //A(i) = -1/i +1
     }
 
     private float InterestFalloff(float xDays, float q, float m)
     {
-        float interestFallOff = ((100 / xDays) + (q * m));
+        float interestFallOff = (100 / xDays) + (q * m);
 
         return interestFallOff;
         // InterestFalloff(x) = 100/x + q*m
