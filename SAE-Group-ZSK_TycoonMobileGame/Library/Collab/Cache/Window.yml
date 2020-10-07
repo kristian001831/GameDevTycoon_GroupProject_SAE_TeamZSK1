@@ -14,12 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Pictures/Dollar_Icon.png
-    - Assets/Pictures/Dollar_Icon.png.meta
-    - Assets/Scenes/Start_Level.unity
-    - Assets/Scripts/CurrencyHandler.cs
     - 
-    m_Values: 0101010101
+    m_Values: 01
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
