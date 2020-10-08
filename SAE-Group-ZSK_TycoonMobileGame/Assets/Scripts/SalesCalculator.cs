@@ -8,15 +8,72 @@ using UnityEngine.UI;
 using UnityEditor.VersionControl;
 using System.Runtime.InteropServices.WindowsRuntime;
 
-public class SalesCalculator : MonoBehaviour
+
+public class SalesTests
+{
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    public static void RunTests()
+    {
+        Debug.Log("Running Calculator Tests");
+        TestNoNegativeSales();
+        TestNoSalesOnCrazyPrice();
+    }
+
+    public static void TestNoNegativeSales()
+    {
+        SalesCalculator calculator = new SalesCalculator();
+
+        for (int i = 0; i < 1000; i++)
+        {
+            calculator.Quality = Random.Range(0f, 1f);
+            calculator.PriceOfProduct = Random.Range(0f, 100f);
+            calculator.PriceInvested = Random.Range(0f, 100000f);
+            calculator.MagnitudeOfQuality = Random.Range(0f, 10f);
+            int day = Random.Range(0, 100);
+
+            float result = calculator.CopiesSoldByDayX(day);
+
+            Debug.Assert(result >= 0, "Calculor calculated negative sales for " + calculator.ToString() + " at day " + day + " Value: " + result);
+            if (result < 0)
+                return;
+        }
+    }
+
+    public static void TestNoSalesOnCrazyPrice()
+    {
+        SalesCalculator calculator = new SalesCalculator();
+
+        calculator.PriceOfProduct = 10000;
+        float totalSold = 0;
+
+        for (int i = 0; i < 50; i++)
+        {
+            calculator.Quality = Random.Range(0f, 1f);
+            calculator.PriceInvested = Random.Range(0, 100000);
+            calculator.MagnitudeOfQuality = Random.Range(0f, 1f);
+
+            for (int d = 0; d < 100; d++)
+            {
+                var copiesSold = calculator.CopiesSoldByDayX(d);
+                totalSold +=  Mathf.Max(0,copiesSold);
+            }
+        }
+
+        Debug.Assert(totalSold == 0, "Test Failed, sold more then 0 copies -> " + totalSold);
+    }
+
+
+}
+
+public class SalesCalculator 
 {
     float price;
     float invest;
 
     public float Quality { get; set; } = 1;
-    public float PriceOfProduct { get => price; set => value = _createProduct.ProductPrice; }
+    public float PriceOfProduct { get => price; set => price = value; }
 
-    public float PriceInvested { get => invest; set => value = _createProduct.ProductInvest; }
+    public float PriceInvested { get => invest; set => invest = value; }
 
     public float MagnitudeOfQuality { get; set; } = 1;
 
@@ -26,28 +83,8 @@ public class SalesCalculator : MonoBehaviour
     //public float InvestmentScaler { get => investmentScaler; set => value = 1; }
     //public float InterestFallOffScaler { get => interestFallOffScaler; set => value = 1; }
 
-    [SerializeField] private TMP_InputField _daySinceRelease;
-    [SerializeField] private Button _calculateCurrencyButton;
-
-    [SerializeField] private CurrencyHandler _currencyHandler;
-    [SerializeField] private CreateProduct _createProduct;
-
     private void Start()
     {
-        _calculateCurrencyButton.onClick.AddListener(CalculateNewCurrency);
-    }
-
-    public void CalculateNewCurrency()
-    {
-        float days = float.Parse(_daySinceRelease.text);
-
-        price = _createProduct.ProductPrice;
-        invest = _createProduct.ProductInvest;
-
-        float x = CopiesSoldByDayX(days);
-
-        float calculateNewCurrency = (x * price) - invest;
-        _currencyHandler.ModifyCurrency(calculateNewCurrency);
     }
 
 
@@ -65,7 +102,12 @@ public class SalesCalculator : MonoBehaviour
 
         result *= Mathf.Lerp(1, InterestFalloff(xDaysSinceRelease, Quality, MagnitudeOfQuality), 1);
 
-        return (int)result;
+        return (int) Mathf.Max(0,result);
+    }
+
+    public override string ToString()
+    {
+        return "SalesCalculator(" + Quality + ", " + PriceOfProduct + ", " + PriceInvested + ", " + MagnitudeOfQuality + ")";
     }
 
     private float TrendFunction(float xDays)
