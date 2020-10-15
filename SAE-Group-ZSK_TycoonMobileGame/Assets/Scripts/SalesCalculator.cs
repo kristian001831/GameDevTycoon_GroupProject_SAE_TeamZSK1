@@ -9,66 +9,14 @@ using UnityEditor.VersionControl;
 using System.Runtime.InteropServices.WindowsRuntime;
 
 
-public class SalesTests
-{
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    public static void RunTests()
-    {
-        Debug.Log("Running Calculator Tests");
-        TestNoNegativeSales();
-        TestNoSalesOnCrazyPrice();
-    }
-
-    public static void TestNoNegativeSales()
-    {
-        SalesCalculator calculator = new SalesCalculator();
-
-        for (int i = 0; i < 1000; i++)
-        {
-            calculator.Quality = Random.Range(0f, 1f);
-            calculator.PriceOfProduct = Random.Range(0f, 100f);
-            calculator.PriceInvested = Random.Range(0f, 100000f);
-            calculator.MagnitudeOfQuality = Random.Range(0f, 10f);
-            int day = Random.Range(0, 100);
-
-            float result = calculator.CopiesSoldByDayX(day);
-
-            Debug.Assert(result >= 0, "Calculor calculated negative sales for " + calculator.ToString() + " at day " + day + " Value: " + result);
-            if (result < 0)
-                return;
-        }
-    }
-
-    public static void TestNoSalesOnCrazyPrice()
-    {
-        SalesCalculator calculator = new SalesCalculator();
-
-        calculator.PriceOfProduct = 10000;
-        float totalSold = 0;
-
-        for (int i = 0; i < 50; i++)
-        {
-            calculator.Quality = Random.Range(0f, 1f);
-            calculator.PriceInvested = Random.Range(0, 100000);
-            calculator.MagnitudeOfQuality = Random.Range(0f, 1f);
-
-            for (int d = 0; d < 100; d++)
-            {
-                var copiesSold = calculator.CopiesSoldByDayX(d);
-                totalSold +=  Mathf.Max(0,copiesSold);
-            }
-        }
-
-        Debug.Assert(totalSold == 0, "Test Failed, sold more then 0 copies -> " + totalSold);
-    }
-
-
-}
-
 public class SalesCalculator 
 {
     float price;
     float invest;
+    float trendScaler;
+    float priceScaler;
+    float investmentScaler;
+    float interestFallOffScaler;
 
     public float Quality { get; set; } = 1;
     public float PriceOfProduct { get => price; set => price = value; }
@@ -78,10 +26,10 @@ public class SalesCalculator
     public float MagnitudeOfQuality { get; set; } = 1;
 
 
-    //public float TrendScaler { get => trendScaler; set => value = 1; }
-    //public float PriceToPurchaseRateScaler { get => priceScaler; set => value = 1; }
-    //public float InvestmentScaler { get => investmentScaler; set => value = 1; }
-    //public float InterestFallOffScaler { get => interestFallOffScaler; set => value = 1; }
+    public float TrendScaler { get => trendScaler; set => value = 1; }
+    public float PriceToPurchaseRateScaler { get => priceScaler; set => value = 1; }
+    public float InvestmentScaler { get => investmentScaler; set => value = 1; }
+    public float InterestFallOffScaler { get => interestFallOffScaler; set => value = 1; }
 
     private void Start()
     {
@@ -153,28 +101,4 @@ public class SalesCalculator
         // InterestFalloff(x) = 100/x + q*m
         // m is the magnitue of the quality
     }
-    /*
-     * F(x) = Trend(g,x) * PriceToPurchase(p,q) * Advertisement(i) * InterestFalloff(x,q)
-     * 
-     * F = Quantity sold on day x
-     * F(0) = release day
-     * q  = Quality (range 0-1)
-     * p = Price 
-     * x = days since release
-     * i = money paid for ads
-     * 
-     * 
-     * InterestFalloff(x) = 100/x + q*m
-     * 
-     * 
-     * Trend(g,x) = sin(x/a) + sin(x/b) + sin(x/c) +1 
-     * 
-     * where a,b,c are random int >0
-     * 
-     * Price(p,q) = -sqrt(p*0.2) + (1+q)^2
-     * 
-     * 
-     * 
-     * 
-     */
 }

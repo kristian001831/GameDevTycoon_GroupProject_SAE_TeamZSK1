@@ -14,44 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Pictures/From Internet.meta
-    - Assets/Pictures/From Internet/icons8-clock-512 .png
-    - Assets/Pictures/From Internet/icons8-clock-512 .png.meta
-    - Assets/Pictures/From Internet/icons8-clock-512.png
-    - Assets/Pictures/From Internet/icons8-clock-512.png.meta
-    - Assets/Pictures/From Kata.meta
-    - Assets/Pictures/From Kata/Continue.png
-    - Assets/Pictures/From Kata/Continue.png.meta
-    - Assets/Pictures/From Kata/Credits.png
-    - Assets/Pictures/From Kata/Credits.png.meta
-    - Assets/Pictures/From Kata/Dollar_Icon.png
-    - Assets/Pictures/From Kata/Dollar_Icon.png.meta
-    - Assets/Pictures/From Kata/Exit.png
-    - Assets/Pictures/From Kata/Exit.png.meta
-    - Assets/Pictures/From Kata/Menu_Title.png
-    - Assets/Pictures/From Kata/Menu_Title.png.meta
-    - Assets/Pictures/From Kata/New_Game.png
-    - Assets/Pictures/From Kata/New_Game.png.meta
-    - Assets/Pictures/From Kata/Settings.png
-    - Assets/Pictures/From Kata/Settings.png.meta
-    - Assets/Pictures/From Kata/blue.png
-    - Assets/Pictures/From Kata/blue.png.meta
-    - Assets/Pictures/From Kata/green.png
-    - Assets/Pictures/From Kata/green.png.meta
-    - Assets/Pictures/From Kata/lila.png
-    - Assets/Pictures/From Kata/lila.png.meta
-    - Assets/Pictures/From Kata/popularity.png
-    - Assets/Pictures/From Kata/popularity.png.meta
-    - Assets/Pictures/From Kata/yellow.png
-    - Assets/Pictures/From Kata/yellow.png.meta
+    - Assets/Prefabs/AddProduct.prefab
+    - Assets/Prefabs/AddProduct.prefab.meta
     - Assets/Scenes/Start_Level.unity
-    - Assets/Scripts/EditorExtensions.meta
-    - Assets/Scripts/EditorExtensions/ReadOnlyInInspector.cs
-    - Assets/Scripts/EditorExtensions/ReadOnlyInInspector.cs.meta
     - Assets/Scripts/Time/TimeSystem.cs
-    - Assets/Scripts/Time/TimeSystem.cs.meta
     - 
-    m_Values: 01010101010101010101010101010101010101010101010101010101010101010101010101
+    m_Values: 0101010101
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

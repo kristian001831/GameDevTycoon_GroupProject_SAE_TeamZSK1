@@ -53,12 +53,14 @@
      <Compile Include="Assets\Scripts\SalesCalculator.cs" />
      <Compile Include="Assets\Scripts\ProductCreation\CreateProduct.cs" />
      <Compile Include="Assets\Scripts\ProductCreation\CleanInputFields.cs" />
-     <Compile Include="Assets\Scripts\SaleTests1.cs" />
+     <Compile Include="Assets\Scripts\SalesVisualizer.cs" />
+     <Compile Include="Assets\Scripts\Time\TimeSystem.cs" />
      <Compile Include="Assets\Scripts\FailSystem.cs" />
      <Compile Include="Assets\Scripts\UIBasics\Tabs.cs" />
      <Compile Include="Assets\Scripts\SaveSystem.cs" />
      <Compile Include="Assets\Scripts\CurrencyHandler.cs" />
      <Compile Include="Assets\Scripts\ProductCreation\Product.cs" />
+     <Compile Include="Assets\Scripts\EditorExtensions\ReadOnlyInInspector.cs" />
      <Compile Include="Assets\Scripts\Saving.cs" />
      <Compile Include="Assets\Scripts\ProductCreation\ProductsHolder.cs" />
      <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
@@ -66,8 +68,7 @@
      <Compile Include="Assets\Scripts\ProductCreation\DisplaySetup.cs" />
      <Compile Include="Assets\Scripts\NotWorkingYet\UIInformations.cs" />
      <Compile Include="Assets\Scripts\Menu\Menu.cs" />
-     <Compile Include="Assets\Scripts\Time\TimeSystem.cs" />
-     <Compile Include="Assets\Scripts\EditorExtensions\ReadOnlyInInspector.cs" />
+     <Compile Include="Assets\Scripts\SalesTest.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
