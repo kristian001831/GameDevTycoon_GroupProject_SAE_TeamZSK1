@@ -11,7 +11,7 @@ public class Product : MonoBehaviour
     public float InvestedAmount;
 
     public float GamePlay;
-    public float Graphcis;
+    public float Graphics;
     public float Dialogue;
     public float GameDesign;
     public float Ai;

@@ -20,14 +20,13 @@ public class TimeSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeCurrentDayText;
     
     [ReadOnlyInInspector.ReadOnly][SerializeField] private float daysPlayedTotal;
-
     [ReadOnlyInInspector.ReadOnly][SerializeField] private float timeCurrentDay;
     
     [HideInInspector] public int TimeMultiplicator { get => timeMultiplicator; set => timeMultiplicator = value; }// Maybe delete later?
 
     [ReadOnlyInInspector.ReadOnly][SerializeField] private int timeMultiplicator;
     [SerializeField] private int currentTimeMultiplicator = 1;
-    private bool coroutine = true; //can start coroutine?
+    [ReadOnlyInInspector.ReadOnly][SerializeField] private bool coroutine = true; //can start coroutine?
 
 
     void Start()
@@ -100,7 +99,7 @@ public class TimeSystem : MonoBehaviour
         
         // Speed x1: 9sec = 1hour in game, Speed x2: 2sec = 1hour in game, speed x3: 1sec = 1hour in game
         yield return new WaitForSeconds(x); //Wait 1 ingame hour
-        Debug.Log("1 in game hour is over.");
+        //Debug.Log("1 in game hour is over.");
 
         if (timeCurrentDay <= 23)
         {

@@ -16,6 +16,7 @@ public class CreateProduct : MonoBehaviour
     [SerializeField] private ProductsHolder _list;
     [SerializeField] private RectTransform _addButton;
     [SerializeField] private RectTransform _container;
+    [SerializeField] private GameObject _nextPanel;
 
     [SerializeField] private TMP_InputField _name;
     [SerializeField] private TMPro.TMP_Dropdown _genre;
@@ -92,6 +93,8 @@ public class CreateProduct : MonoBehaviour
 
         _addButton.localPosition = new Vector3(-600, _list.Products[_list.Products.Count - 1].GetComponentInChildren<RectTransform>().localPosition.y - 300, 0);
 
+        obj.SetActive(false);
+        _nextPanel.SetActive(true);
         _createObjectUI.SetActive(false);
     }
 }
