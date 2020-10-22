@@ -28,7 +28,7 @@ public class CurrencyHandler : MonoBehaviour
         Currency += x;
         
         Debug.Log("In Modified Currency");
-        Debug.Log(Currency);
+        Debug.Log("Currency is: " + Currency);
         OnChangeCurrency?.Invoke(Currency);
         
         currencyText.SetText("{0} $", Currency);

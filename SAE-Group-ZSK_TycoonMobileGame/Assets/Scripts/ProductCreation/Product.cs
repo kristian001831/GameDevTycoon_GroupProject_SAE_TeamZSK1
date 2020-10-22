@@ -17,4 +17,7 @@ public class Product : MonoBehaviour
     public float Ai;
     public float Audio;
     public float WorldDesign;
+
+    public float QualityOfTheProduct;
 }
+

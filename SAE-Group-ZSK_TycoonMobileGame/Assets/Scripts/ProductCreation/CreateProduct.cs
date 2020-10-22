@@ -24,6 +24,7 @@ public class CreateProduct : MonoBehaviour
     [SerializeField] private TMP_InputField _invest;
 
     private CurrencyHandler currencyHandler;
+    private UIInformations uiInformations;
 
     private Product _productInfo;
     private RectTransform _display;
@@ -34,6 +35,9 @@ public class CreateProduct : MonoBehaviour
     {
         currencyHandler = FindObjectOfType<CurrencyHandler>();
         Debug.Log(currencyHandler);
+
+        uiInformations = FindObjectOfType<UIInformations>();
+        Debug.Log(uiInformations);
     }
 
     public void CreateAProduct()
@@ -60,13 +64,24 @@ public class CreateProduct : MonoBehaviour
 
         if (float.TryParse(_invest.text, out _productInfo.InvestedAmount))
         {
-            _productInfo.InvestedAmount = float.Parse(_invest.text);
-            double tempI = (double)Math.Round(_productInfo.InvestedAmount, 2);
-            _productInfo.InvestedAmount = (float)tempI;
+            // reoead to avoid spending more money than the player has
+                _productInfo.InvestedAmount = float.Parse(_invest.text);
+                double tempI = (double)Math.Round(_productInfo.InvestedAmount, 2);
+                _productInfo.InvestedAmount = (float)tempI;
 
-            ProductInvest = (float)tempI;
+                ProductInvest = (float)tempI;
 
-            currencyHandler.ModifyCurrency(-_productInfo.InvestedAmount);
+                //_productInfo.InvestedAmount      
+                if(currencyHandler.Currency - _productInfo.InvestedAmount < 0)
+                {
+                    uiInformations.ShowHint("You dont have enought money!");
+                    return;
+                }
+                // substracts the invested money from the currency balance
+                currencyHandler.ModifyCurrency(-_productInfo.InvestedAmount);
+
+                
+            
         }
         else
         {
@@ -74,7 +89,7 @@ public class CreateProduct : MonoBehaviour
             ProductInvest = 0.0f;
         }
 
-        _list.Products.Add(obj);
+        _list.AddProduct(obj);
         obj.transform.parent = _productsParent;
 
         obj.transform.position = new Vector3(_productsParent.position.x, _productsParent.position.y, _productsParent.position.z);

@@ -19,7 +19,7 @@ public class TimeSystem : MonoBehaviour
     private const string playerPrefNameTimeCurrentDay = "TimeCurrentDay";
     [SerializeField] private TextMeshProUGUI timeCurrentDayText;
     
-    [ReadOnlyInInspector.ReadOnly][SerializeField] private float daysPlayedTotal;
+    [ReadOnlyInInspector.ReadOnly][SerializeField] public float daysPlayedTotal;
     [ReadOnlyInInspector.ReadOnly][SerializeField] private float timeCurrentDay;
     
     [HideInInspector] public int TimeMultiplicator { get => timeMultiplicator; set => timeMultiplicator = value; }// Maybe delete later?

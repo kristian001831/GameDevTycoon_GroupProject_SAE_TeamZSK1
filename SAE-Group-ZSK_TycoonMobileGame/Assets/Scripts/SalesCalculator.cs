@@ -7,9 +7,9 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEditor.VersionControl;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine.PlayerLoop;
 
-
-public class SalesCalculator 
+public class SalesCalculator : MonoBehaviour
 {
     float price;
     float invest;
@@ -17,41 +17,65 @@ public class SalesCalculator
     float priceScaler;
     float investmentScaler;
     float interestFallOffScaler;
+    float qualityMagnitude;
 
-    public float Quality { get; set; } = 1;
+    public float Quality { get; set; }
     public float PriceOfProduct { get => price; set => price = value; }
 
     public float PriceInvested { get => invest; set => invest = value; }
 
-    public float MagnitudeOfQuality { get; set; } = 1;
+    public float MagnitudeOfQuality { get => qualityMagnitude; set => value = 1; }
 
-
+    //ask luca to look over the properties.
     public float TrendScaler { get => trendScaler; set => value = 1; }
     public float PriceToPurchaseRateScaler { get => priceScaler; set => value = 1; }
     public float InvestmentScaler { get => investmentScaler; set => value = 1; }
     public float InterestFallOffScaler { get => interestFallOffScaler; set => value = 1; }
 
-    private void Start()
+    [SerializeField] private TimeSystem _timeSystem;
+    [SerializeField] private ProductsHolder _productsHolder;
+    [SerializeField] private Product _product;
+    [SerializeField] private CurrencyHandler _currency;
+
+
+
+    private void Update() 
     {
+        ChangeCurrency();
     }
 
+    private void ChangeCurrency()
+    {
+        float xDays = _timeSystem.daysPlayedTotal;
 
-    //clamp every function to 0
+        float copiesSold = CopiesSoldByDayX(xDays);
+        float totalMoneyMade = _product.Price * copiesSold;
+
+        _currency.ModifyCurrency(totalMoneyMade);
+
+
+
+        //foreach (var item in _productsHolder.Products)
+        //{
+        //}
+    }
+        
 
 
     public int CopiesSoldByDayX(float xDaysSinceRelease) //
     {
         float result = 1;
-        result *= Mathf.Lerp(1, TrendFunction(xDaysSinceRelease), 1);
+        result *= Mathf.Clamp(  Mathf.Lerp(1, TrendFunction(xDaysSinceRelease), 1),     0f, 1f);
 
-        result *= Mathf.Lerp(1, PriceToPurchase(Quality, PriceOfProduct), 1);
+        result *= Mathf.Clamp(  Mathf.Lerp(1, PriceToPurchase(Quality, PriceOfProduct), 1),  0f, 1f);
 
-        result *= Mathf.Lerp(1, Investment(PriceInvested), 1);
+        result *= Mathf.Clamp(  Mathf.Lerp(1, Investment(PriceInvested), 1),     0f,1f);
 
-        result *= Mathf.Lerp(1, InterestFalloff(xDaysSinceRelease, Quality, MagnitudeOfQuality), 1);
-
-        return (int) Mathf.Max(0,result);
+        result *= Mathf.Clamp(  Mathf.Lerp(1, InterestFalloff(xDaysSinceRelease, Quality, MagnitudeOfQuality), 1),   0f, 1f);
+       
+        return (int) result;
     }
+
 
     public override string ToString()
     {
