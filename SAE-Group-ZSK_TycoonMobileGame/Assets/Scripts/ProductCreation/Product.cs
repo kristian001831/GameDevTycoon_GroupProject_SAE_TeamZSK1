@@ -9,6 +9,8 @@ public class Product : MonoBehaviour
     public EGenre Genre;
     public float Price;
     public float InvestedAmount;
+    
+    public float DayCreated;
 
     public float GamePlay;
     public float Graphics;

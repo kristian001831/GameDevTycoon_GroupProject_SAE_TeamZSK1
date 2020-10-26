@@ -26,7 +26,7 @@ public class TimeSystem : MonoBehaviour
 
     [ReadOnlyInInspector.ReadOnly][SerializeField] private int timeMultiplicator;
     [SerializeField] private int currentTimeMultiplicator = 1;
-    [ReadOnlyInInspector.ReadOnly][SerializeField] private bool coroutine = true; //can start coroutine?
+    [ReadOnlyInInspector.ReadOnly][SerializeField] public bool coroutine = true; //can start coroutine?
 
 
     void Start()

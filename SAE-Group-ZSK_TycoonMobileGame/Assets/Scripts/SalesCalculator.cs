@@ -9,7 +9,7 @@ using UnityEditor.VersionControl;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine.PlayerLoop;
 
-public class SalesCalculator : MonoBehaviour
+public class SalesCalculator
 {
     float price;
     float invest;
@@ -32,48 +32,20 @@ public class SalesCalculator : MonoBehaviour
     public float InvestmentScaler { get => investmentScaler; set => value = 1; }
     public float InterestFallOffScaler { get => interestFallOffScaler; set => value = 1; }
 
-    [SerializeField] private TimeSystem _timeSystem;
-    [SerializeField] private ProductsHolder _productsHolder;
-    [SerializeField] private Product _product;
-    [SerializeField] private CurrencyHandler _currency;
 
-
-
-    private void Update() 
-    {
-        ChangeCurrency();
-    }
-
-    private void ChangeCurrency()
-    {
-        float xDays = _timeSystem.daysPlayedTotal;
-
-        float copiesSold = CopiesSoldByDayX(xDays);
-        float totalMoneyMade = _product.Price * copiesSold;
-
-        _currency.ModifyCurrency(totalMoneyMade);
-
-
-
-        //foreach (var item in _productsHolder.Products)
-        //{
-        //}
-    }
-        
-
-
+    
     public int CopiesSoldByDayX(float xDaysSinceRelease) //
     {
         float result = 1;
-        result *= Mathf.Clamp(  Mathf.Lerp(1, TrendFunction(xDaysSinceRelease), 1),     0f, 1f);
+        result *= Mathf.Clamp(Mathf.Lerp(1, TrendFunction(xDaysSinceRelease), 1), 0f, 1f);
 
-        result *= Mathf.Clamp(  Mathf.Lerp(1, PriceToPurchase(Quality, PriceOfProduct), 1),  0f, 1f);
+        result *= Mathf.Clamp(Mathf.Lerp(1, PriceToPurchase(Quality, PriceOfProduct), 1), 0f, 1f);
 
-        result *= Mathf.Clamp(  Mathf.Lerp(1, Investment(PriceInvested), 1),     0f,1f);
+        result *= Mathf.Clamp(Mathf.Lerp(1, Investment(PriceInvested), 1), 0f, 1f);
 
-        result *= Mathf.Clamp(  Mathf.Lerp(1, InterestFalloff(xDaysSinceRelease, Quality, MagnitudeOfQuality), 1),   0f, 1f);
-       
-        return (int) result;
+        result *= Mathf.Clamp(Mathf.Lerp(1, InterestFalloff(xDaysSinceRelease, Quality, MagnitudeOfQuality), 1), 0f, 1f);
+
+        return (int)result;
     }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -11,7 +12,8 @@ public class AttributeSet : MonoBehaviour
     [SerializeField] private Slider[] _sliders;
     [SerializeField] private GameObject _playerStats;
 
-    [SerializeField] private SalesCalculator _salesCalculator = new SalesCalculator();
+    public bool AttributesAreNowSet = false;
+    public float qualityFromAttributes = 0;
 
     public void AttributesAreSet()
     {
@@ -32,8 +34,10 @@ public class AttributeSet : MonoBehaviour
         product.SetActive(true);
         _playerStats.SetActive(true);
         _panel.SetActive(false);
+       
+        CalculateQuality(productInfo);
 
-
+        AttributesAreNowSet = true;
     }
 
 
@@ -41,16 +45,7 @@ public class AttributeSet : MonoBehaviour
     {
 
 
-        //for more random values
-        //float x1 = Random.Range(0.01f, 26f); // has the least priority
-        //float x2 = Random.Range(26f, 51f);   //has medium priority
-        //float x3 = Random.Range(51f, 76f);   //has high priority
-        //float x4 = Random.Range(76f, 101f);  // most important priority
-        
-        
-
-
-        float[] attributesArr = new float[7] { product.GamePlay, product.Graphics, product.Dialogue, product.GameDesign, product.Ai, product.Audio, product.WorldDesign };
+        float[] playerAttributes = new float[7] { product.GamePlay, product.Graphics, product.Dialogue, product.GameDesign, product.Ai, product.Audio, product.WorldDesign };
 
         float[] goodAdventureAttributes = new float[7] { 25f, 30f, 60f, 80f, 40f, 10f, 40f }; // most important is the Dialog and the GameDesign
 
@@ -67,7 +62,7 @@ public class AttributeSet : MonoBehaviour
         float[] goodSportsAttributes = new float[7] { 90f, 70f, 50f, 70f, 60f, 50f, 30f };
 
 
-        //float[][] jaggedArray = new float[][] { goodAdventureAttributes, goodFPSAttributes, goodHorrorAttributes, goodPlatformerAttributes, goodRPGAttributes, goodSimulationAttributes, goodSportsAttributes };
+        //  float[][] jaggedArray = new float[][] { goodAdventureAttributes, goodFPSAttributes, goodHorrorAttributes, goodPlatformerAttributes, goodRPGAttributes, goodSimulationAttributes, goodSportsAttributes };
 
         //jaggedArray[0] = new float[7] { 25f, 30f, 60f, 80f, 40f, 10f, 40f };
         //jaggedArray[1] = new float[7] { 80f, 60f, 10f, 40f, 30f, 70f, 30f };
@@ -77,137 +72,66 @@ public class AttributeSet : MonoBehaviour
         //jaggedArray[5] = new float[7] { 60f, 50f, 70f, 80f, 99f, 60f, 50f };
         //jaggedArray[6] = new float[7] { 90f, 70f, 50f, 70f, 60f, 50f, 30f };
 
-        float qualityFromAttributes = 1;
+        qualityFromAttributes = 0;
 
         switch (product.Genre)
         {
 
             case Product.EGenre.Adventure:
-                for (int i = 0; i < attributesArr.Length; i++)
-                {
-                    if (attributesArr[i] < goodAdventureAttributes[i])
-                    {
-                        qualityFromAttributes -= 0.14f;
-                    }
-
-                }
-
-                UnityEngine.Debug.Log("Quality value:" + qualityFromAttributes);
-
-                product.QualityOfTheProduct = qualityFromAttributes;
-                _salesCalculator.Quality = qualityFromAttributes;
+                qualityFromAttributes = CalculateQualityFuntion(goodAdventureAttributes, playerAttributes);
                 break;
 
             case Product.EGenre.FPS:
-                for (int i = 0; i < attributesArr.Length; i++)
-                {
-                    if (attributesArr[i] < goodFPSAttributes[i])
-                    {
-                        qualityFromAttributes -= 0.14f;
-                    }
+                qualityFromAttributes = CalculateQualityFuntion(goodFPSAttributes, playerAttributes);
 
-                }
-
-                UnityEngine.Debug.Log("Quality value:" + qualityFromAttributes);
-
-                product.QualityOfTheProduct = qualityFromAttributes;
-                _salesCalculator.Quality = qualityFromAttributes;
                 break;
 
             case Product.EGenre.Horror:
-                for (int i = 0; i < attributesArr.Length; i++)
-                {
-                    if (attributesArr[i] < goodHorrorAttributes[i])
-                    {
-                        qualityFromAttributes -= 0.14f;
-                    }
+                qualityFromAttributes = CalculateQualityFuntion(goodHorrorAttributes, playerAttributes);
 
-                }
-
-                UnityEngine.Debug.Log("Quality value:" + qualityFromAttributes);
-
-                product.QualityOfTheProduct = qualityFromAttributes;
-                _salesCalculator.Quality = qualityFromAttributes;
                 break;
 
             case Product.EGenre.Platformer:
-                for (int i = 0; i < attributesArr.Length; i++)
-                {
-                    if (attributesArr[i] < goodPlatformerAttributes[i])
-                    {
-                        qualityFromAttributes -= 0.14f;
-                    }
+                qualityFromAttributes = CalculateQualityFuntion(goodPlatformerAttributes, playerAttributes);
 
-                }
-
-                UnityEngine.Debug.Log("Quality value:" + qualityFromAttributes);
-
-                product.QualityOfTheProduct = qualityFromAttributes;
-                _salesCalculator.Quality = qualityFromAttributes;
                 break;
 
             case Product.EGenre.RPG:
-                for (int i = 0; i < attributesArr.Length; i++)
-                {
-                    if (attributesArr[i] < goodRPGAttributes[i])
-                    {
-                        qualityFromAttributes -= 0.14f;
-                    }
+                qualityFromAttributes = CalculateQualityFuntion(goodRPGAttributes, playerAttributes);
 
-                }
-
-                UnityEngine.Debug.Log("Quality value:" + qualityFromAttributes);
-
-                product.QualityOfTheProduct = qualityFromAttributes;
-                _salesCalculator.Quality = qualityFromAttributes;
                 break;
 
             case Product.EGenre.Simulation:
-                for (int i = 0; i < attributesArr.Length; i++)
-                {
-                    if (attributesArr[i] < goodSimulationAttributes[i])
-                    {
-                        qualityFromAttributes -= 0.14f;
-                    }
+                qualityFromAttributes = CalculateQualityFuntion(goodSimulationAttributes, playerAttributes);
 
-                }
-
-                UnityEngine.Debug.Log("Quality value:" + qualityFromAttributes);
-
-                product.QualityOfTheProduct = qualityFromAttributes;
-                _salesCalculator.Quality = qualityFromAttributes;
                 break;
 
             case Product.EGenre.Sports:
-                for (int i = 0; i < attributesArr.Length; i++)
-                {
-                    if (attributesArr[i] < goodSportsAttributes[i])
-                    {
-                        qualityFromAttributes -= 0.14f;
-                    }
+                qualityFromAttributes = CalculateQualityFuntion(goodSportsAttributes, playerAttributes);
 
-                }
-
-                UnityEngine.Debug.Log("Quality value:" + qualityFromAttributes);
-
-                product.QualityOfTheProduct = qualityFromAttributes;
-                _salesCalculator.Quality = qualityFromAttributes;
                 break;
+
             default:
                 break;
-        } 
+        }
+
+
+        product.QualityOfTheProduct = qualityFromAttributes;
     }
 
-    //private void CalculateQualityFuntion()
-    //{
+    private float CalculateQualityFuntion(float[] goodAttributes, float[] playerAttributes)
+    {
+        qualityFromAttributes = 1;
 
-    //    for (int i = 0; i < jaggedArray.Length - 1; i++)
-    //    {
-    //        if (attributesArr[i] <= jaggedArray[i][i])
-    //        {
-    //            qualityFromAttributes -= 0.14f;
-    //        }
+        for (int i = 0; i < playerAttributes.Length; i++)
+        {
+            if (playerAttributes[i] < goodAttributes[i])
+            {
+                qualityFromAttributes -= 0.14f;
+            }
+        }
 
-    //    }
-    //}
+        return qualityFromAttributes;
+
+    }
 }

@@ -22,14 +22,21 @@ public class CreateProduct : MonoBehaviour
     [SerializeField] private TMPro.TMP_Dropdown _genre;
     [SerializeField] private TMP_InputField _price;
     [SerializeField] private TMP_InputField _invest;
+    [SerializeField] private TextMeshProUGUI _productsCreatedStat;
 
     private CurrencyHandler currencyHandler;
     private UIInformations uiInformations;
 
     private Product _productInfo;
     private RectTransform _display;
+    private int _productsCreatedAmount;
     public float ProductPrice;
     public float ProductInvest;
+
+    [SerializeField] private TimeSystem _timeSystem ;
+
+
+
 
     void Start()
     {
@@ -38,6 +45,9 @@ public class CreateProduct : MonoBehaviour
 
         uiInformations = FindObjectOfType<UIInformations>();
         Debug.Log(uiInformations);
+
+
+
     }
 
     public void CreateAProduct()
@@ -48,6 +58,9 @@ public class CreateProduct : MonoBehaviour
         _productInfo = obj.GetComponent<Product>();
         _productInfo.Name = _name.text;
         _productInfo.Genre = (Product.EGenre)_genre.value;
+        
+        _productInfo.DayCreated =   _timeSystem.daysPlayedTotal;
+
 
         if (float.TryParse(_price.text, out _productInfo.Price))
         {
@@ -55,6 +68,7 @@ public class CreateProduct : MonoBehaviour
             double tempP = (double)Math.Round(_productInfo.Price, 2);
             _productInfo.Price = (float)tempP;
             ProductPrice = (float)tempP;
+            
         }
         else
         {
@@ -89,6 +103,7 @@ public class CreateProduct : MonoBehaviour
             ProductInvest = 0.0f;
         }
 
+
         _list.AddProduct(obj);
         obj.transform.parent = _productsParent;
 
@@ -108,8 +123,13 @@ public class CreateProduct : MonoBehaviour
 
         _addButton.localPosition = new Vector3(-600, _list.Products[_list.Products.Count - 1].GetComponentInChildren<RectTransform>().localPosition.y - 300, 0);
 
+        _productsCreatedAmount += 1;
+        _productsCreatedStat.text = _productsCreatedAmount.ToString();
+
         obj.SetActive(false);
         _nextPanel.SetActive(true);
         _createObjectUI.SetActive(false);
+
+
     }
 }
