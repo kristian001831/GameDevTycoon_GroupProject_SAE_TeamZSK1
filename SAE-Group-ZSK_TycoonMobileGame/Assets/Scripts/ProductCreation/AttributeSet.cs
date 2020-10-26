@@ -32,6 +32,7 @@ public class AttributeSet : MonoBehaviour
         productInfo.WorldDesign = _sliders[6].value;
 
         product.SetActive(true);
+
         _playerStats.SetActive(true);
         _panel.SetActive(false);
        
@@ -47,7 +48,7 @@ public class AttributeSet : MonoBehaviour
 
         float[] playerAttributes = new float[7] { product.GamePlay, product.Graphics, product.Dialogue, product.GameDesign, product.Ai, product.Audio, product.WorldDesign };
 
-        float[] goodAdventureAttributes = new float[7] { 25f, 30f, 60f, 80f, 40f, 10f, 40f }; // most important is the Dialog and the GameDesign
+        float[] goodAdventureAttributes = new float[7] { 25f, 30f, 60f, 80f, 40f, 10f, 40f };
 
         float[] goodFPSAttributes = new float[7] { 80f, 60f, 10f, 40f, 30f, 70f, 30f };
 

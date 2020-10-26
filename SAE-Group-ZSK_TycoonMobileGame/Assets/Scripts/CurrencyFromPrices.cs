@@ -17,47 +17,47 @@ public class CurrencyFromPrices : MonoBehaviour
 
     private void Start()
     {
-        _createProduct = GetComponent<CreateProduct>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        while (_timeSystem.coroutine)
-        {
-            ChangeCurrencyWithProductPrices();     
-        }
+       
+        ChangeCurrencyWithProductPrices();     
+        
     }
 
     private void ChangeCurrencyWithProductPrices()
     {
-        _attributeSet.AttributesAreSet();
-       
-        _salesCalculator.PriceOfProduct = _createProduct.ProductPrice;
-        _salesCalculator.PriceInvested = _createProduct.ProductInvest;
-
-       _salesCalculator.Quality = _attributeSet.qualityFromAttributes;
-
-
-        if (_attributeSet.AttributesAreNowSet == true)
+        if (_timeSystem.ChangedDay == true)
         {
-            Debug.Log("stepped into if"  );
+            float price = _createProduct.ProductPrice;
+            float invested = _createProduct.ProductInvest;
 
-            float xDays = _timeSystem.daysPlayedTotal - _product.DayCreated;
+            _salesCalculator.PriceOfProduct = price;
+            _salesCalculator.PriceInvested = invested;
 
-            Debug.Log("xDays" + xDays );
+            _salesCalculator.Quality = _attributeSet.qualityFromAttributes;
 
-            foreach (var item in _productsHolder.Products)
+
+            if (_attributeSet.AttributesAreNowSet == true)
             {
-                float copiesSold = _salesCalculator.CopiesSoldByDayX(xDays);
 
-                Debug.Log("copiesSold: " + copiesSold);
+                float xDays = _timeSystem.daysPlayedTotal - _product.DayCreated;
 
 
-                float totalMoneyMade = _product.Price * copiesSold;
-                Debug.Log("totalMoney" + totalMoneyMade);
-                if (copiesSold > 0)
+                foreach (var item in _productsHolder.Products)
                 {
-                    _currencyHandler.ModifyCurrency(totalMoneyMade);
+                    // float copiesSold = _salesCalculator.CopiesSoldByDayX(xDays);
+                    float copiesSold = 1f;
+                    Debug.Log("copiesSold: " + copiesSold);
+
+
+                    float totalMoneyMade = price * copiesSold;
+                    Debug.Log("totalMoney" + totalMoneyMade);
+                    if (copiesSold > 0)
+                    {
+                        _currencyHandler.ModifyCurrency(totalMoneyMade);
+                    }
                 }
             }
         }

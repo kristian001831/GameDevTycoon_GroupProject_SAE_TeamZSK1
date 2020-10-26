@@ -26,7 +26,9 @@ public class TimeSystem : MonoBehaviour
 
     [ReadOnlyInInspector.ReadOnly][SerializeField] private int timeMultiplicator;
     [SerializeField] private int currentTimeMultiplicator = 1;
-    [ReadOnlyInInspector.ReadOnly][SerializeField] public bool coroutine = true; //can start coroutine?
+    [ReadOnlyInInspector.ReadOnly][SerializeField] private bool coroutine = true; //can start coroutine?
+
+    public bool ChangedDay = false;
 
 
     void Start()
@@ -104,11 +106,13 @@ public class TimeSystem : MonoBehaviour
         if (timeCurrentDay <= 23)
         {
             timeCurrentDay += 1;
+            ChangedDay = false;
         }
         else if (timeCurrentDay == 24)
         {
             daysPlayedTotal += 1;
             timeCurrentDay = 1;
+            ChangedDay = true;
         }
 
         coroutine = true;
