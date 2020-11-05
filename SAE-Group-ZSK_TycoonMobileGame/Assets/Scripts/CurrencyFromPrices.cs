@@ -47,7 +47,7 @@ public class CurrencyFromPrices : MonoBehaviour
 
                 foreach (var item in _productsHolder.Products)
                 {
-                    // float copiesSold = _salesCalculator.CopiesSoldByDayX(xDays);
+                    float _copiesSold = _salesCalculator.CopiesSoldByDayX(xDays);
                     float copiesSold = 1f;
                     Debug.Log("copiesSold: " + copiesSold);
 

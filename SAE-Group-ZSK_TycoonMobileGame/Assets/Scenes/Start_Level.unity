@@ -6992,6 +6992,7 @@ GameObject:
   - component: {fileID: 599248617}
   - component: {fileID: 599248616}
   - component: {fileID: 599248619}
+  - component: {fileID: 599248620}
   m_Layer: 0
   m_Name: SceneScripts
   m_TagString: Untagged
@@ -7060,8 +7061,27 @@ MonoBehaviour:
   daysPlayedTotal: 0
   timeCurrentDay: 0
   timeMultiplicator: 0
-  currentTimeMultiplicator: 3
+  currentTimeMultiplicator: 1
   coroutine: 1
+  ChangedDay: 0
+--- !u!114 &599248620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599248615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a9eef1c675a4845a84ff2c97f0d69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _createProduct: {fileID: 459226939}
+  _attributeSet: {fileID: 841176211}
+  _currencyHandler: {fileID: 599248616}
+  _timeSystem: {fileID: 599248619}
+  _productsHolder: {fileID: 1827759951}
+  _product: {fileID: 6303433218428455317, guid: 1e3b1200a072c1944b683949aed7c74b, type: 3}
 --- !u!1001 &607437899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9750,8 +9770,8 @@ MonoBehaviour:
   - {fileID: 619536269}
   - {fileID: 410180758}
   _playerStats: {fileID: 83298201}
-  _product: {fileID: 0}
   AttributesAreNowSet: 0
+  qualityFromAttributes: 0
 --- !u!114 &841176212
 MonoBehaviour:
   m_ObjectHideFlags: 0
