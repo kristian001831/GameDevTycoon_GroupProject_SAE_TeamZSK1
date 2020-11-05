@@ -29,7 +29,7 @@ public class TimeSystem : MonoBehaviour
     [ReadOnlyInInspector.ReadOnly][SerializeField] private bool coroutine = true; //can start coroutine?
 
     public bool ChangedDay = false;
-
+    public event System.Action NewDay;
 
     void Start()
     {
@@ -113,6 +113,7 @@ public class TimeSystem : MonoBehaviour
             daysPlayedTotal += 1;
             timeCurrentDay = 1;
             ChangedDay = true;
+            NewDay?.Invoke();
         }
 
         coroutine = true;
