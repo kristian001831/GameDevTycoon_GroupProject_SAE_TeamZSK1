@@ -10,13 +10,20 @@ public class CleanSliders : MonoBehaviour
 
     [SerializeField] float maxResources;
 
+   
 
     private void Start()
     {
+
         foreach (var slider in _sliders)
         {
             slider.onValueChanged.AddListener(UpdateSliders);
         }
+    }
+
+    private void _createProduct_NewProduct()
+    {
+        throw new NotImplementedException();
     }
 
     private void UpdateSliders(float arg0)

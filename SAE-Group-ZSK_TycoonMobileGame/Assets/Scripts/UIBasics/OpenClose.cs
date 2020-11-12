@@ -6,8 +6,14 @@ using UnityEngine;
 public class OpenClose : MonoBehaviour
 {
     [SerializeField] private GameObject _panel;
-    [SerializeField] private GameObject _playerStats;
     [SerializeField] private bool _hidePlayerStats;
+
+    private GameObject _playerStats;
+
+    void Awake()
+    {
+        _playerStats = GameObject.FindGameObjectWithTag("PlayerStats");
+    }
 
     public void Open()
     {
@@ -16,6 +22,10 @@ public class OpenClose : MonoBehaviour
             _panel.SetActive(true);
             if (_hidePlayerStats)
             {
+                if (_playerStats == null)
+                {
+                    _playerStats = GameObject.FindGameObjectWithTag("PlayerStats");
+                }
                 _playerStats.SetActive(false);
             }
         }
@@ -25,11 +35,15 @@ public class OpenClose : MonoBehaviour
     {
         if (_panel.activeSelf)
         {
-            _panel.SetActive(false);
             if (_hidePlayerStats)
             {
+                if (_playerStats == null)
+                {
+                    _playerStats = GameObject.FindGameObjectWithTag("PlayerStats");
+                }
                 _playerStats.SetActive(true);
             }
+            _panel.SetActive(false);
         }
     }
 }

@@ -22,7 +22,5 @@ public class Product : MonoBehaviour
 
     public float QualityOfTheProduct;
 
-    public List<float> CopiesSoldAtDay = new List<float>();
-
 }
 

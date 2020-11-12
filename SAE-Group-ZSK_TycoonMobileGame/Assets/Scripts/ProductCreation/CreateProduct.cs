@@ -33,10 +33,10 @@ public class CreateProduct : MonoBehaviour
     public float ProductPrice;
     public float ProductInvest;
 
-    [SerializeField] private TimeSystem _timeSystem ;
+    [SerializeField] private TimeSystem _timeSystem;
 
-
-
+    public List<float> TotalPrices = new List<float>();
+    public List<float> TotalInvested = new List<float>();
 
     void Start()
     {
@@ -45,7 +45,6 @@ public class CreateProduct : MonoBehaviour
 
         uiInformations = FindObjectOfType<UIInformations>();
         Debug.Log(uiInformations);
-
 
 
     }
@@ -58,8 +57,8 @@ public class CreateProduct : MonoBehaviour
         _productInfo = obj.GetComponent<Product>();
         _productInfo.Name = _name.text;
         _productInfo.Genre = (Product.EGenre)_genre.value;
-        
-        _productInfo.DayCreated =   _timeSystem.daysPlayedTotal;
+
+        _productInfo.DayCreated = _timeSystem.daysPlayedTotal;
 
 
         if (float.TryParse(_price.text, out _productInfo.Price))
@@ -68,39 +67,42 @@ public class CreateProduct : MonoBehaviour
             double tempP = (double)Math.Round(_productInfo.Price, 2);
             _productInfo.Price = (float)tempP;
             ProductPrice = (float)tempP;
-            
+            TotalPrices.Add(_productInfo.Price);
         }
         else
         {
             _productInfo.Price = 0.0f;
             ProductPrice = 0.0f;
+            TotalPrices.Add(_productInfo.Price);
         }
 
         if (float.TryParse(_invest.text, out _productInfo.InvestedAmount))
         {
             // reoead to avoid spending more money than the player has
-                _productInfo.InvestedAmount = float.Parse(_invest.text);
-                double tempI = (double)Math.Round(_productInfo.InvestedAmount, 2);
-                _productInfo.InvestedAmount = (float)tempI;
+            _productInfo.InvestedAmount = float.Parse(_invest.text);
+            double tempI = (double)Math.Round(_productInfo.InvestedAmount, 2);
+            _productInfo.InvestedAmount = (float)tempI;
 
-                ProductInvest = (float)tempI;
+            ProductInvest = (float)tempI;
 
-                //_productInfo.InvestedAmount      
-                if(currencyHandler.Currency - _productInfo.InvestedAmount < 0)
-                {
-                    uiInformations.ShowHint("You dont have enought money!");
-                    return;
-                }
-                // substracts the invested money from the currency balance
-                currencyHandler.ModifyCurrency(-_productInfo.InvestedAmount);
+            //_productInfo.InvestedAmount      
+            if (currencyHandler.Currency - _productInfo.InvestedAmount < 0)
+            {
+                uiInformations.ShowHint("You dont have enought money!");
+                return;
+            }
+            // substracts the invested money from the currency balance
+            currencyHandler.ModifyCurrency(-_productInfo.InvestedAmount);
 
-                
-            
+            TotalInvested.Add(_productInfo.InvestedAmount);
+
+
         }
         else
         {
             _productInfo.InvestedAmount = 0.0f;
             ProductInvest = 0.0f;
+            TotalInvested.Add(_productInfo.InvestedAmount);
         }
 
 
